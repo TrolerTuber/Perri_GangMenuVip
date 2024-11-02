@@ -27,7 +27,7 @@ RegisterCommand('givevip', function(playerId, args)
     end
 end)
 
-RegisterCommand('quitarcacheo', function(playerId, args)
+RegisterCommand('removevip', function(playerId, args)
     local xPlayer = ESX.GetPlayerFromId(playerId)
     local target = args[1]
 
