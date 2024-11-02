@@ -1,9 +1,9 @@
-const audio = new Audio('https://r2.fivemanage.com/rDF92kFR7F8pjYfg0Fq5U/mixkit-select-click-1109.wav')
+const audio = new Audio('https://r2.fivemanage.com/rDF92kFR7F8pjYfg0Fq5U/mixkit-select-click-1109.wav');
 const s_hover = new Audio('https://r2.fivemanage.com/R92pivz8ZlXwjJjTvi3Oq/hover.wav');
 
 function sound() {
     audio.currentTime = 0;
-    audio.play()
+    audio.play();
 }
 
 
@@ -38,8 +38,8 @@ $('#vehiculo').click(function(){
 })
 
 $('button').click(function(){
-    sound()
-    CloseAll()
+    sound();
+    CloseAll();
 })
 
 $('#cacheo').click(function(){
@@ -57,12 +57,12 @@ $('#esposar').click(function(){
 
 $(document).keyup((e) => {
     if (e.key === 'Escape') {
-        CloseAll()
+        CloseAll();
     }
 });
 
 
 function CloseAll() {
-    $('.container').hide()
+    $('.container').hide();
     $.post(`https://${GetParentResourceName()}/exit`);
 }
