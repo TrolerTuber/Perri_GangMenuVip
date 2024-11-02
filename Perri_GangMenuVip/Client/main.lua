@@ -5,31 +5,31 @@ dragged.dragging = false
 
 
 
-RegisterNetEvent('Perri_Cacheo:client:drag', function(copId)
+RegisterNetEvent('Perri_Cacheo:client:drag', function(sc)
     wasDragged = not wasDragged  
     if isHandcuffed then
         dragged.dragging = not dragged.dragging
-        dragged.CopId = copId
+        dragged.sc = sc
         
         CreateThread(function()
             while wasDragged do
-                local targetPed = GetPlayerPed(GetPlayerFromServerId(dragged.CopId))
+                local targetPed = GetPlayerPed(GetPlayerFromServerId(dragged.sc))
 
                 if DoesEntityExist(targetPed) and IsPedOnFoot(targetPed) and not IsPedDeadOrDying(targetPed, true) then
-                    AttachEntityToEntity(ESX.PlayerData.ped, targetPed, 11816, 0.54, 0.54, 0.0, 0.0, 0.0, 0.0, false, false, false, false, 2, true)
+                    AttachEntityToEntity(cache.ped, targetPed, 11816, 0.54, 0.54, 0.0, 0.0, 0.0, 0.0, false, false, false, false, 2, true)
                 else
                     wasDragged = false
                 end
 
                 Wait(50)
             end
-            DetachEntity(ESX.PlayerData.ped, true, false)
+            DetachEntity(cache.ped, true, false)
         end)
     else
         DisplayRadar(true)
         wasDragged = false
         dragged.dragging = false
-        DetachEntity(ESX.PlayerData.ped, true, false)
+        DetachEntity(cache.ped, true, false)
     end
 end)
 
