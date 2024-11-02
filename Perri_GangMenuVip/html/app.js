@@ -51,9 +51,7 @@ $('#bolsa').click(function(){
 })
 
 $('#esposar').click(function(){
-    sound()
     $.post(`https://${GetParentResourceName()}/esposar`);
-    CloseAll()
 })
 
 
