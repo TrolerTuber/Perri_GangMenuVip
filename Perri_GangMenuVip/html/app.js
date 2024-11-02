@@ -11,15 +11,15 @@ window.addEventListener('message', function (event) {
     var v = event.data
     switch (v.action) {
         case 'show':
-            $('.container').show()
+            $('.container').show();
         break;
 
         case 'bolsa':
-            $('#bolsaCiega').show()
+            $('#bolsaCiega').show();
         break;
         case 'quitarBolsa': 
-            $('#bolsaCiega').hide()
-        break
+            $('#bolsaCiega').hide();
+        break;
     }
 });
 
