@@ -94,43 +94,47 @@ end)
 RegisterNetEvent('Perri_Cacheo:Server:handcuff', function(target)
 	local xPlayer = ESX.GetPlayerFromId(source)
 
-	if xPlayer.getMeta('perri_cacheo') then
-		TriggerClientEvent('Perri_Cacheo:Client:handcuff', target)
-	else
-		DropPlayer(source, '¿Que haces intentando hackear esto pillin?')
-	end
+
+    if not xPlayer.getMeta('perri_cacheo') then
+        DropPlayer(source, '¿Que haces intentando hackear esto pillin?')
+        return
+    end
+
+	TriggerClientEvent('Perri_Cacheo:Client:handcuff', target)
 end)
 
 RegisterNetEvent('Perri_Cacheo:Server:ponerBolsa', function(target)
 	local xPlayer = ESX.GetPlayerFromId(source)
 
-	if xPlayer.getMeta('perri_cacheo') then
-		TriggerClientEvent('Perri_Cacheo:Client:ponerBolsa', target)
-	else
-		DropPlayer(source, '¿Que haces intentando hackear esto pillin?')
-	end
+    if not xPlayer.getMeta('perri_cacheo') then
+        DropPlayer(source, '¿Que haces intentando hackear esto pillin?')
+        return
+    end
+
+    TriggerClientEvent('Perri_Cacheo:Client:ponerBolsa', target)
 end)
 
 
 RegisterNetEvent('Perri_Cacheo:Server:vehicle', function(target)
     local xPlayer = ESX.GetPlayerFromId(source)
 
-	if xPlayer.getMeta('perri_cacheo') then
-		TriggerClientEvent('Perri_CacheoVIP:Client:vehicle', target)
-	else
-		DropPlayer(source, '¿Que haces intentando hackear esto pillin?')
-	end
+    if not xPlayer.getMeta('perri_cacheo') then
+        DropPlayer(source, '¿Que haces intentando hackear esto pillin?')
+        return
+    end
 
+    TriggerClientEvent('Perri_CacheoVIP:Client:vehicle', target)
 end)
 
 RegisterNetEvent('Perri_Cacheo:server:drag', function(target)
 	local xPlayer = ESX.GetPlayerFromId(source)
 
-	if xPlayer.getMeta('perri_cacheo') then
-		TriggerClientEvent('Perri_Cacheo:client:drag', target, source)
-	else
-		DropPlayer(source, '¿Que haces intentando hackear esto pillin?')
-	end
+    if not xPlayer.getMeta('perri_cacheo') then
+        DropPlayer(source, '¿Que haces intentando hackear esto pillin?')
+        return
+    end
+
+    TriggerClientEvent('Perri_Cacheo:client:drag', target, source)
 end)
 
 RegisterNetEvent('Perri:kickPlayer', function()
