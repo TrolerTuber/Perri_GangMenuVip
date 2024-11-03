@@ -2,9 +2,6 @@ isOpen, cegado, isHandcuffed, wasDragged, inVehicle = false, false, false, false
 dragged = {}
 dragged.dragging = false
 
-
-
-
 RegisterNetEvent('Perri_Cacheo:client:drag', function(sc)
     wasDragged = not wasDragged  
 
