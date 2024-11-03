@@ -8,14 +8,12 @@ function openMenu()
         return
     end
 
-    if not isCacheoEnabled or cegado or isHandcuffed then
-        if Config.Notification then
-            lib.notify({
-                title = '¡ERROR!',
-                description = Config.NoPermission,
-                type = 'error'
-            })
-        end
+    if (not isCacheoEnabled or cegado or isHandcuffed) and Config.Notification then
+        lib.notify({
+            title = '¡ERROR!',
+            description = Config.NoPermission,
+            type = 'error'
+        })
         return
     end
 
@@ -65,19 +63,19 @@ function ponerBolsa()
     
     cegado = not cegado
 
-    if cegado then
+    if not cegado then
         SendNUIMessage({
-            action = 'quitarBolsa'
-        })
-        DisplayRadar(true)
+            action = 'bolsa'
+        }) 
+    
+        DisplayRadar(false)
         return
     end
 
     SendNUIMessage({
-        action = 'bolsa'
-    }) 
-
-    DisplayRadar(false)
+        action = 'quitarBolsa'
+    })
+    DisplayRadar(true)
 end
 
 
@@ -87,23 +85,7 @@ function handcuff()
        
 	isHandcuffed = not isHandcuffed
 
-	if isHandcuffed then
-        lib.requestAnimDict('mp_arresting', 1000)
-
-		TaskPlayAnim(cache.ped, 'mp_arresting', 'idle', 8.0, -8, -1, 49, 0, 0, 0, 0)
-
-		SetEnableHandcuffs(cache.ped, true)
-		DisablePlayerFiring(cache.ped, true)
-		SetCurrentPedWeapon(cache.ped, `WEAPON_UNARMED`, true) 
-		SetPedCanPlayGestureAnims(cache.ped, false)
-		DisplayRadar(false)
-        CreateThread(function()
-            while isHandcuffed do
-                DisableWhenIsHandcuffed()
-                Wait(0)
-            end
-        end)
-	else
+    if not isHandcuffed then
         wasDragged = false
         dragged.dragging = false
         DetachEntity(cache.ped, true, false)
@@ -113,9 +95,24 @@ function handcuff()
 		DisablePlayerFiring(cache.ped, false)
 		SetPedCanPlayGestureAnims(cache.ped, true)
 		DisplayRadar(true)
-
-
+        return
     end
+
+    lib.requestAnimDict('mp_arresting', 1000)
+    TaskPlayAnim(cache.ped, 'mp_arresting', 'idle', 8.0, -8, -1, 49, 0, 0, 0, 0)
+    SetEnableHandcuffs(cache.ped, true)
+
+    DisablePlayerFiring(cache.ped, true)
+    SetCurrentPedWeapon(cache.ped, `WEAPON_UNARMED`, true) 
+    SetPedCanPlayGestureAnims(cache.ped, false)
+    DisplayRadar(false)
+    
+    CreateThread(function()
+        while isHandcuffed do
+            DisableWhenIsHandcuffed()
+            Wait(0)
+        end
+    end)
 end
 
 
